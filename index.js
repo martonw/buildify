@@ -157,16 +157,9 @@ Builder.prototype.uglify = function(options) {
     mangle: true
   }, options);
 
-  var parse = uglifyJS.parser.parse,
-      uglify = uglifyJS.uglify;
+  options.fromString = true;
 
-  var output = parse(this.content);
-
-  output = uglify.ast_mangle(output, { mangle: options.mangle });
-  output = uglify.ast_squeeze(output);
-  output = uglify.gen_code(output);
-
-  this.content = output;
+  this.content = uglifyJS.minify(this.content, options).code;
 
   return this;
 };

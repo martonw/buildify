@@ -199,11 +199,11 @@ exports['uglify'] = {
   'default options': function(test) {
     var b = builder();
 
-    b.setContent('function test() { var longvar = 123; }');
+    b.setContent('function test() { var longvar = 123; return longvar; }');
 
     b.uglify();
 
-    test.same(b.content, 'function test(){var e=123}');
+    test.same(b.content, 'function test(){var t=123;return t}');
 
     test.done();
   },
@@ -211,11 +211,11 @@ exports['uglify'] = {
   'mangle: false': function(test) {
     var b = builder();
 
-    b.setContent('function test() { var longvar = 123; }');
+    b.setContent('function test() { var longvar = 123; return longvar; }');
 
     b.uglify({ mangle: false });
 
-    test.same(b.content, 'function test(){var longvar=123}');
+    test.same(b.content, 'function test(){var longvar=123;return longvar}');
 
     test.done();
   }

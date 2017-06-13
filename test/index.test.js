@@ -123,6 +123,16 @@ exports['load'] = function(test) {
 };
 
 
+exports['load with templating'] = function(test) {
+  var b = builder(__dirname + '/support');
+
+  b.load('template.txt', {version: '1', body: 'b'});
+  test.same(b.content, 'Module v1: b!');
+
+  test.done();
+};
+
+
 exports['concat'] = {
   'default eol': function(test) {
     var b = builder(__dirname + '/support');

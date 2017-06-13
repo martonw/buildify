@@ -79,10 +79,15 @@ Builder.prototype.getContent = function() {
  *
  * @param {String} file     File path relative to current directory
  */
-Builder.prototype.load = function(file) {
+Builder.prototype.load = function(file, templateData) {
   file = path.normalize(this.dir + '/' + file);
 
-  this.content = fs.readFileSync(file, this.options.encoding);
+  var content = fs.readFileSync(file, this.options.encoding);
+  if (templateData) {
+    content = _.template(content, templateData);
+  }
+
+  this.content = content;
 
   return this;
 };

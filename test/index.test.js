@@ -203,7 +203,7 @@ exports['uglify'] = {
 
     b.uglify();
 
-    test.same(b.content, 'function test(){var t=123;return t}');
+    test.same(b.content, 'function test(){return 123}');
 
     test.done();
   },
@@ -213,7 +213,7 @@ exports['uglify'] = {
 
     b.setContent('function test() { var longvar = 123; return longvar; }');
 
-    b.uglify({ mangle: false });
+    b.uglify({ mangle: false, compress: false });
 
     test.same(b.content, 'function test(){var longvar=123;return longvar}');
 

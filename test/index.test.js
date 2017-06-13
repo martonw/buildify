@@ -175,6 +175,17 @@ exports['concat'] = {
 };
 
 
+exports['concatStr'] = function (test) {
+  var b = builder(__dirname + '/support');
+
+  b.load('foo.txt');
+  b.concatStr(['a', 'b']);
+  test.same(b.content, 'FOO\na\nb');
+
+  test.done();
+}
+
+
 exports['wrap'] = function(test) {
   var b = builder(__dirname + '/support');
 

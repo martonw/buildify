@@ -120,6 +120,24 @@ Builder.prototype.concat = function(files, eol) {
 };
 
 /**
+ * Concatenate contents (string)
+ *
+ * @param {String|String[]} contents   content strings to concat
+ * @param {String} [eol]            Join character. Default: '\n'
+ */
+Builder.prototype.concatStr = function(contents, eol) {
+  eol = (_.isUndefined(eol)) ? this.options.eol : eol;
+
+  if (!_.isArray(contents)) contents = [contents];
+
+  if (this.content) contents.unshift(this.content);
+
+  this.content = contents.join(eol);
+
+  return this;
+};
+
+/**
  * Wrap the contents in a template
  *
  * @param {String} templatePath   Template file path, relative to current directory. Should have a {{body}} tag where content will go.
